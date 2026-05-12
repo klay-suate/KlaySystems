@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Klay Systems | Sobre Nós</title>
+  <meta name="description" content="Conheça a Klay Systems — empresa de tecnologia baseada em Pemba, Moçambique, especializada em desenvolvimento web, sistemas e apps mobile.">
+  <link rel="icon" type="image/png" href="img/icon.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .page-hero {
+      padding: calc(var(--nav-h) + 64px) 0 64px;
+      text-align: center;
+      background: var(--bg2);
+      border-bottom: 1px solid #e8e8e4;
+    }
+    .page-hero h1 { margin-bottom: 12px; }
+    .page-hero p { max-width: 520px; margin: 0 auto; font-size: 1.1rem; }
+
+    /* Founder section */
+    .founder-grid {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .founder-photo {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      background: var(--bg2);
+      border: 1.5px solid #e8e8e4;
+      position: relative;
+    }
+    .founder-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .founder-photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    .founder-photo-placeholder .avatar {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: #e0e8f8;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+    }
+    .founder-badge {
+      position: absolute;
+      bottom: 20px; left: 20px;
+      background: var(--bg);
+      border: 1px solid #e0e0dc;
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: var(--shadow);
+    }
+    .founder-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+    .founder-badge span { font-size: 0.82rem; font-weight: 500; }
+    .founder-info {}
+    .founder-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .founder-title { color: var(--primary); font-weight: 500; font-size: 0.95rem; margin-bottom: 24px; }
+    .founder-bio { margin-bottom: 28px; line-height: 1.75; }
+    .founder-links { display: flex; gap: 12px; flex-wrap: wrap; }
+    .founder-skill-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; }
+
+    /* Values */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+    .value-card {
+      background: var(--bg);
+      border: 1.5px solid #e8e8e4;
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      transition: var(--transition);
+    }
+    .value-card:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+      transform: translateY(-3px);
+    }
+    .value-icon { font-size: 2rem; margin-bottom: 14px; }
+    .value-card h3 { margin-bottom: 8px; }
+    .value-card p { font-size: 0.93rem; }
+
+    /* Mission/Vision */
+    .mv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .mv-card {
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+    }
+    .mv-card.mission { background: #0f172a; color: #fff; }
+    .mv-card.vision  { background: var(--primary-light); border: 1.5px solid #bdd3f7; }
+    .mv-card h3 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .mv-card.mission h3 { color: rgba(255,255,255,0.45); }
+    .mv-card.vision  h3 { color: var(--primary); }
+    .mv-card p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+    .mv-card.mission p { color: rgba(255,255,255,0.8); }
+    .mv-card.vision  p { color: var(--text); }
+
+    @media (max-width: 900px) {
+      .founder-grid { grid-template-columns: 1fr; gap: 36px; }
+      .founder-photo { max-width: 320px; margin: 0 auto; }
+      .mv-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <img src="img/logo.png" alt="Klay Systems" height="36">
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Início</a>
+      <a href="precos.html">Serviços</a>
+      <a href="projetos.html">Projetos</a>
+      <a href="sobre.html" class="active">Sobre</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="index.html#contacto" class="btn btn-primary">Pedir orçamento</a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="index.html">Início</a>
+  <a href="precos.html">Serviços</a>
+  <a href="projetos.html">Projetos</a>
+  <a href="sobre.html" class="active">Sobre</a>
+  <div class="mobile-menu-cta">
+    <a href="index.html#contacto" class="btn btn-primary btn-lg">Pedir orçamento grátis</a>
+    <button class="btn btn-wa btn-lg" data-wa>WhatsApp</button>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="section-label reveal">Sobre a Klay Systems</div>
+    <h1 class="reveal reveal-delay-1">Tecnologia moçambicana para empresas moçambicanas</h1>
+    <p class="reveal reveal-delay-2">Somos uma empresa de desenvolvimento digital baseada em Pemba, construída para ajudar negócios locais a crescer no digital com profissionalismo e preços justos.</p>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="section">
+  <div class="container">
+    <div class="founder-grid">
+      <div class="founder-photo reveal">
+        <!-- Se tiver foto real, substituir pelo img abaixo -->
+        <img src="img/pp.jpg" alt="Klayton Suate — Fundador da Klay Systems" width="380" height="475" loading="lazy"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="founder-photo-placeholder" style="display:none">
+          <div class="avatar">👨‍💻</div>
+          <span>Klayton Suate</span>
+        </div>
+        <div class="founder-badge">
+          <div class="founder-badge-dot"></div>
+          <span>Disponível para novos projectos</span>
+        </div>
+      </div>
+
+      <div class="founder-info reveal reveal-delay-2">
+        <div class="section-label">Fundador</div>
+        <div class="founder-name">Klayton Suate</div>
+        <div class="founder-title">Developer Full-Stack & Fundador</div>
+
+        <p class="founder-bio">
+          Sou developer full-stack baseado em Pemba, Cabo Delgado. Fundei a Klay Systems com um objectivo claro: ajudar empresas moçambicanas a ter presença digital profissional sem pagar preços de agências internacionais.
+        </p>
+        <p class="founder-bio" style="margin-top:-8px">
+          Acredito que uma empresa pequena em Pemba merece o mesmo nível de qualidade digital que uma empresa internacional. É isso que construímos  dia após dia, projecto após projecto.
+        </p>
+
+        <div class="founder-skill-tags">
+          <span class="tag tech">React</span>
+          <span class="tag tech">Node.js</span>
+          <span class="tag tech">JavaScript</span>
+          <span class="tag tech">PHP</span>
+          <span class="tag tech">WordPress</span>
+          <span class="tag tech">MySQL</span>
+          <span class="tag tech">MongoDB</span>
+          <span class="tag">UI/UX Design</span>
+        </div>
+
+        <div class="founder-links">
+          <a href="https://github.com/klay-suate" target="_blank" class="btn btn-outline">
+            GitHub ↗
+          </a>
+          <a href="https://www.linkedin.com/in/klayton-ant%C3%B3nio-suate-981164262/" target="_blank" class="btn btn-outline">
+            LinkedIn ↗
+          </a>
+          <a href="https://klay-suate.github.io/portfolio01/" target="_blank" class="btn btn-outline">
+            Portfólio pessoal ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION / VISION -->
+<section class="section alt-bg">
+  <div class="container">
+    <div class="section-label reveal">Propósito</div>
+    <h2 class="section-title reveal reveal-delay-1">O que nos move</h2>
+    <p class="section-sub reveal reveal-delay-2">Não construímos apenas websites — construímos ferramentas que ajudam negócios a crescer.</p>
+
+    <div class="mv-grid reveal">
+      <div class="mv-card mission">
+        <h3>Nossa Missão</h3>
+        <p>Desenvolver soluções digitais acessíveis, elegantes e eficazes que transformem ideias em negócios reais para empresas moçambicanas.</p>
+      </div>
+      <div class="mv-card vision">
+        <h3>Nossa Visão</h3>
+        <p>Ser a referência em desenvolvimento digital em Moçambique, onde qualidade e proximidade andam sempre juntas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="section">
+  <div class="container">
+    <div class="section-label reveal">Valores</div>
+    <h2 class="section-title reveal reveal-delay-1">O que nos define</h2>
+    <p class="section-sub reveal reveal-delay-2">Os princípios que guiam cada decisão e cada linha de código que escrevemos.</p>
+
+    <div class="values-grid">
+      <div class="value-card reveal reveal-delay-1">
+        <div class="value-icon">🎯</div>
+        <h3>Foco no resultado</h3>
+        <p>Não entregamos apenas um site bonito, entregamos uma ferramenta que gera contactos, vendas e credibilidade para o seu negócio.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-2">
+        <div class="value-icon">⚡</div>
+        <h3>Rapidez sem compromissos</h3>
+        <p>Prazos cumpridos são o nosso standard mínimo. Entregamos rápido porque sabemos que tempo perdido é dinheiro perdido para si.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-3">
+        <div class="value-icon">🤝</div>
+        <h3>Transparência total</h3>
+        <p>Preços claros, prazos definidos e comunicação constante. Sem surpresas a meio do projecto, o que combinamos é o que entregamos.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-1">
+        <div class="value-icon">🌍</div>
+        <h3>Contexto local</h3>
+        <p>Desenvolvemos pensando no utilizador moçambicano — conexões mais lentas, dispositivos mobile, WhatsApp como canal principal.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-2">
+        <div class="value-icon">🔒</div>
+        <h3>Qualidade de código</h3>
+        <p>Código limpo, seguro e escalável. Os nossos projectos são construídos para durar e crescer com o seu negócio.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-3">
+        <div class="value-icon">📞</div>
+        <h3>Suporte humano</h3>
+        <p>Não somos uma plataforma  somos pessoas. Pode falar directamente com quem fez o seu projecto, sem tickets ou chatbots.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="section alt-bg" id="contacto">
+  <div class="container" style="text-align:center">
+    <div class="section-label reveal">Contacto</div>
+    <h2 class="section-title reveal reveal-delay-1">Fale directamente connosco</h2>
+    <p class="section-sub reveal reveal-delay-2" style="margin: 0 auto 48px">Preferimos WhatsApp, é mais rápido e mais prático. Para projectos complexos, o email funciona muito bem.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;max-width:760px;margin:0 auto 48px" class="reveal">
+      <a href="https://wa.me/258870718218?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20orçamento." target="_blank"
+         style="display:flex;align-items:center;gap:16px;padding:24px;background:var(--bg);border:1.5px solid #e8e8e4;border-radius:var(--radius-lg);transition:var(--transition);text-decoration:none"
+         onmouseover="this.style.borderColor='#25d366'" onmouseout="this.style.borderColor='#e8e8e4'">
+        <div style="width:48px;height:48px;border-radius:12px;background:#dcfce7;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.4rem">💬</div>
+        <div style="text-align:left">
+          <div style="font-weight:600;font-size:0.95rem;color:var(--text)">WhatsApp</div>
+          <div style="font-size:0.88rem;color:var(--soft)">+258 870 718 218</div>
+          <div style="font-size:0.78rem;color:#22c55e;margin-top:2px;font-weight:500">Resposta em &lt; 2h</div>
+        </div>
+      </a>
+      <a href="mailto:klaysuate@gmail.com"
+         style="display:flex;align-items:center;gap:16px;padding:24px;background:var(--bg);border:1.5px solid #e8e8e4;border-radius:var(--radius-lg);transition:var(--transition);text-decoration:none"
+         onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='#e8e8e4'">
+        <div style="width:48px;height:48px;border-radius:12px;background:var(--primary-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.4rem">✉️</div>
+        <div style="text-align:left">
+          <div style="font-weight:600;font-size:0.95rem;color:var(--text)">Email</div>
+          <div style="font-size:0.88rem;color:var(--soft)">klay.webservices<br>@gmail.com</div>
+          <div style="font-size:0.78rem;color:var(--soft);margin-top:2px">Resposta em 24h</div>
+        </div>
+      </a>
+      <div style="display:flex;align-items:center;gap:16px;padding:24px;background:var(--bg);border:1.5px solid #e8e8e4;border-radius:var(--radius-lg)">
+        <div style="width:48px;height:48px;border-radius:12px;background:#fff3e0;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.4rem">📍</div>
+        <div style="text-align:left">
+          <div style="font-weight:600;font-size:0.95rem;color:var(--text)">Localização</div>
+          <div style="font-size:0.88rem;color:var(--soft)">Pemba, Cabo Delgado</div>
+          <div style="font-size:0.78rem;color:var(--soft);margin-top:2px">Moçambique</div>
+        </div>
+      </div>
+    </div>
+
+    <form action="https://formspree.io/f/xqeypeen" method="POST" class="contact-form reveal reveal-delay-2">
+      <div class="form-row">
+        <input type="text" name="Nome" placeholder="O seu nome" required>
+        <input type="email" name="Email" placeholder="O seu email" required>
+      </div>
+      <input type="tel" name="Telefone" placeholder="WhatsApp / Telefone (opcional)">
+      <select name="servico" required>
+        <option value="">Escolha o serviço</option>
+        <option>Criação de Website</option>
+        <option>Desenvolvimento de Software</option>
+        <option>Loja Online</option>
+        <option>App Mobile</option>
+        <option>Automação</option>
+        <option>Manutenção / Suporte</option>
+        <option>Outro</option>
+      </select>
+      <textarea name="Mensagem" placeholder="Descreva o seu projecto (quanto mais detalhe, melhor a proposta)"></textarea>
+      <button type="submit" class="btn btn-primary btn-lg form-submit">Enviar mensagem</button>
+    </form>
+    <div class="form-success">
+      ✓ Mensagem enviada com sucesso! Respondemos em até 2 horas nos dias úteis.
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="img/logo.png" alt="Klay Systems" class="footer-logo-img">
+      <p>Transformamos ideias em soluções digitais que geram negócio. Baseados em Pemba, trabalhamos para todo Moçambique.</p>
+      <div class="footer-social">
+        <a href="https://github.com/klay-suate" target="_blank" class="social-btn">GH</a>
+        <a href="https://www.instagram.com/klay_suate" target="_blank" class="social-btn">IG</a>
+        <a href="https://www.linkedin.com/in/klayton-ant%C3%B3nio-suate-981164262/" target="_blank" class="social-btn">in</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="precos.html">Serviços</a></li>
+        <li><a href="projetos.html">Portfólio</a></li>
+        <li><a href="sobre.html">Sobre nós</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Serviços</h4>
+      <ul>
+        <li><a href="precos.html">Websites</a></li>
+        <li><a href="precos.html">App Mobile</a></li>
+        <li><a href="precos.html">Sistemas de Gestão</a></li>
+        <li><a href="precos.html">Automação</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <a href="https://wa.me/258870718218" class="footer-contact-item" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.108 1.522 5.83L.054 23.077a.75.75 0 00.916.914l5.316-1.454A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.723 9.723 0 01-4.985-1.37l-.356-.213-3.688 1.008 1.03-3.597-.233-.371A9.694 9.694 0 012.25 12c0-5.376 4.374-9.75 9.75-9.75S21.75 6.624 21.75 12 17.376 21.75 12 21.75z"/></svg>
+        +258 870 718 218
+      </a>
+      <a href="mailto:klaysuate@gmail.com" class="footer-contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        klay.webservices@gmail.com
+      </a>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Pemba, Cabo Delgado, MZ
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom container">
+    <span>© 2026 Klay Systems. Todos os direitos reservados.</span>
+    <span>Feito com total atensão em Moçambique</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/258870718218?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20orçamento." class="wa-float" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.108 1.522 5.83L.054 23.077a.75.75 0 00.916.914l5.316-1.454A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.723 9.723 0 01-4.985-1.37l-.356-.213-3.688 1.008 1.03-3.597-.233-.371A9.694 9.694 0 012.25 12c0-5.376 4.374-9.75 9.75-9.75S21.75 6.624 21.75 12 17.376 21.75 12 21.75z"/></svg>
+  <span class="wa-label">WhatsApp</span>
+</a>
+
+<script src="script.js"></script>
+</body>
+</html>

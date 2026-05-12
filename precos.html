@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Klay Systems | Serviços e Preços</title>
+  <meta name="description" content="Planos e preços para websites, sistemas, apps mobile e automação em Moçambique. Transparência total — sem surpresas no orçamento.">
+  <link rel="icon" type="image/png" href="img/icon.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Page-specific ── */
+    .page-hero {
+      padding: calc(var(--nav-h) + 64px) 0 64px;
+      text-align: center;
+      background: var(--bg2);
+      border-bottom: 1px solid #e8e8e4;
+    }
+    .page-hero h1 { margin-bottom: 12px; }
+    .page-hero p  { max-width: 520px; margin: 0 auto; font-size: 1.1rem; }
+
+    /* Package cards */
+    .packages {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 24px;
+      margin-bottom: 80px;
+    }
+    .pkg-card {
+      background: var(--bg);
+      border: 1.5px solid #e8e8e4;
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      position: relative;
+      transition: var(--transition);
+    }
+    .pkg-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-4px);
+    }
+    .pkg-card.featured {
+      border-color: var(--primary);
+      background: linear-gradient(180deg, #f0f7ff 0%, var(--bg) 100%);
+    }
+    .pkg-badge {
+      position: absolute;
+      top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .pkg-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .pkg-desc {
+      font-size: 0.9rem;
+      color: var(--soft);
+      margin-bottom: 20px;
+      min-height: 40px;
+    }
+    .pkg-price {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .pkg-price span { font-size: 1rem; font-weight: 400; color: var(--soft); }
+    .pkg-deadline {
+      font-size: 0.82rem;
+      color: var(--soft);
+      margin-bottom: 24px;
+    }
+    .pkg-features {
+      list-style: none;
+      margin-bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .pkg-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--soft);
+    }
+    .pkg-features li::before {
+      content: '✓';
+      font-weight: 700;
+      color: var(--primary);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .pkg-features li.no::before { content: '✕'; color: #ccc; }
+    .pkg-features li.no { color: #bbb; }
+    .pkg-cta { width: 100%; justify-content: center; }
+
+    /* Service rows */
+    .service-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1.5px solid #e8e8e4;
+      margin-bottom: 60px;
+    }
+    .service-table th {
+      background: var(--bg2);
+      font-family: 'Syne', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--soft);
+      padding: 14px 20px;
+      text-align: left;
+      border-bottom: 1.5px solid #e8e8e4;
+    }
+    .service-table td {
+      padding: 16px 20px;
+      font-size: 0.95rem;
+      border-bottom: 1px solid #f0f0ec;
+      vertical-align: middle;
+    }
+    .service-table tr:last-child td { border-bottom: none; }
+    .service-table tr:hover td { background: #fafaf8; }
+    .price-cell {
+      font-weight: 600;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+    .deadline-cell { color: var(--soft); font-size: 0.88rem; }
+    .action-cell { text-align: right; }
+
+    /* FAQ */
+    .faq-list { display: flex; flex-direction: column; gap: 1px; border: 1.5px solid #e8e8e4; border-radius: var(--radius-lg); overflow: hidden; }
+    .faq-item { background: var(--bg); }
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.98rem;
+      border-bottom: 1px solid #f0f0ec;
+      user-select: none;
+      gap: 12px;
+    }
+    .faq-item:last-child .faq-question { border-bottom: none; }
+    .faq-icon {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: var(--bg2);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+    .faq-question.open .faq-icon { transform: rotate(45deg); background: var(--primary-light); color: var(--primary); }
+    .faq-answer {
+      display: none;
+      padding: 0 24px 20px;
+      font-size: 0.93rem;
+      color: var(--soft);
+      line-height: 1.7;
+    }
+    .faq-answer.open { display: block; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <img src="img/logo.png" alt="Klay Systems" height="36">
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Início</a>
+      <a href="precos.html" class="active">Serviços</a>
+      <a href="projetos.html">Projetos</a>
+      <a href="sobre.html">Sobre</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="index.html#contacto" class="btn btn-primary">Pedir orçamento</a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="index.html">Início</a>
+  <a href="precos.html" class="active">Serviços</a>
+  <a href="projetos.html">Projetos</a>
+  <a href="sobre.html">Sobre</a>
+  <div class="mobile-menu-cta">
+    <a href="index.html#contacto" class="btn btn-primary btn-lg">Pedir orçamento grátis</a>
+    <button class="btn btn-wa btn-lg" data-wa>WhatsApp</button>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="section-label reveal">Serviços e Preços</div>
+    <h1 class="reveal reveal-delay-1">Transparência total sem surpresas</h1>
+    <p class="reveal reveal-delay-2">Escolha o serviço que melhor se adapta ao seu negócio. Orçamento definitivo em 24h após a nossa conversa.</p>
+  </div>
+</section>
+
+<!-- PACKAGES — Website -->
+<section class="section">
+  <div class="container">
+    <div class="section-label reveal">Website Profissional</div>
+    <h2 class="section-title reveal reveal-delay-1">Escolha o plano certo para o seu site</h2>
+    <p class="section-sub reveal reveal-delay-2">Todos os planos incluem design responsivo, domínio próprio e 30 dias de suporte após entrega.</p>
+
+    <div class="packages reveal">
+      <!-- Básico -->
+      <div class="pkg-card">
+        <div class="pkg-name">Básico</div>
+        <div class="pkg-desc">Ideal para profissionais liberais e pequenas empresas que precisam de presença online.</div>
+        <div class="pkg-price">7.000 <span>MZN</span></div>
+        <div class="pkg-deadline">⏱ Entrega em 7–10 dias úteis</div>
+        <ul class="pkg-features">
+          <li>Até 5 páginas</li>
+          <li>Design responsivo (mobile-first)</li>
+          <li>Formulário de contacto</li>
+          <li>Integração WhatsApp</li>
+          <li>Google Maps incorporado</li>
+          <li>SEO básico configurado</li>
+          <li class="no">Painel de administração</li>
+          <li class="no">Blog / notícias</li>
+          <li class="no">Loja online</li>
+        </ul>
+        <button class="btn btn-outline pkg-cta" data-wa data-wa-msg="Olá! Tenho interesse no plano Básico de Website (7.000 MZN). Podem dar mais detalhes?">Pedir este plano</button>
+      </div>
+
+      <!-- Profissional -->
+      <div class="pkg-card featured">
+        <div class="pkg-badge">⭐ Mais popular</div>
+        <div class="pkg-name">Profissional</div>
+        <div class="pkg-desc">Para empresas que querem impacto online, gestão de conteúdo e mais visibilidade.</div>
+        <div class="pkg-price">18.000 <span>MZN</span></div>
+        <div class="pkg-deadline">⏱ Entrega em 15–21 dias úteis</div>
+        <ul class="pkg-features">
+          <li>Até 12 páginas</li>
+          <li>Design premium personalizado</li>
+          <li>Painel de administração (CMS)</li>
+          <li>Blog / secção de notícias</li>
+          <li>Formulários avançados</li>
+          <li>Integração WhatsApp + email</li>
+          <li>SEO avançado + Google Analytics</li>
+          <li>Certificado SSL incluído</li>
+          <li class="no">Loja online</li>
+        </ul>
+        <button class="btn btn-primary pkg-cta" data-wa data-wa-msg="Olá! Tenho interesse no plano Profissional de Website (18.000 MZN). Podem dar mais detalhes?">Pedir este plano</button>
+      </div>
+
+      <!-- Avançado -->
+      <div class="pkg-card">
+        <div class="pkg-name">Avançado</div>
+        <div class="pkg-desc">Solução completa com loja online, pagamentos e gestão total do negócio digital.</div>
+        <div class="pkg-price">35.000 <span>MZN</span></div>
+        <div class="pkg-deadline">⏱ Entrega em 25–40 dias úteis</div>
+        <ul class="pkg-features">
+          <li>Páginas ilimitadas</li>
+          <li>Loja online completa</li>
+          <li>Gestão de produtos e stock</li>
+          <li>Integração com pagamentos</li>
+          <li>Painel administrativo completo</li>
+          <li>Relatórios e estatísticas</li>
+          <li>SEO completo + Analytics</li>
+          <li>Suporte prioritário 60 dias</li>
+          <li>Domínio + hosting 1 ano</li>
+        </ul>
+        <button class="btn btn-outline pkg-cta" data-wa data-wa-msg="Olá! Tenho interesse no plano Avançado de Website (35.000 MZN). Podem dar mais detalhes?">Pedir este plano</button>
+      </div>
+    </div>
+
+    <!-- All services table -->
+    <div class="section-label reveal" style="margin-top:16px">Todos os serviços</div>
+    <h2 class="section-title reveal reveal-delay-1">Tabela completa de serviços</h2>
+    <p class="section-sub reveal reveal-delay-2">Preços de referência. O orçamento definitivo depende dos requisitos específicos do seu projecto.</p>
+
+    <div class="reveal">
+      <table class="service-table">
+        <thead>
+          <tr>
+            <th>Serviço</th>
+            <th>Preço estimado</th>
+            <th>Prazo estimado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong>Website Básico</strong><br>
+              <small style="color:var(--soft)">Até 5 páginas, responsivo, SEO básico</small>
+            </td>
+            <td class="price-cell">7.000 – 12.000 MZN</td>
+            <td class="deadline-cell">7 – 10 dias</td>
+            <td class="action-cell"><button class="btn btn-outline" style="padding:8px 16px;font-size:0.85rem" data-wa data-wa-msg="Orçamento Website Básico">Pedir</button></td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Website Profissional</strong><br>
+              <small style="color:var(--soft)">CMS, blog, formulários avançados, SEO</small>
+            </td>
+            <td class="price-cell">15.000 – 25.000 MZN</td>
+            <td class="deadline-cell">15 – 21 dias</td>
+            <td class="action-cell"><button class="btn btn-outline" style="padding:8px 16px;font-size:0.85rem" data-wa data-wa-msg="Orçamento Website Profissional">Pedir</button></td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Loja Online</strong><br>
+              <small style="color:var(--soft)">Produtos, carrinho, pagamentos, gestão</small>
+            </td>
+            <td class="price-cell">15.000 – 40.000 MZN</td>
+            <td class="deadline-cell">21 – 35 dias</td>
+            <td class="action-cell"><button class="btn btn-outline" style="padding:8px 16px;font-size:0.85rem" data-wa data-wa-msg="Orçamento Loja Online">Pedir</button></td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Sistema de Gestão</strong><br>
+              <small style="color:var(--soft)">Clientes, stock, vendas, relatórios</small>
+            </td>
+            <td class="price-cell">20.000 – 60.000 MZN</td>
+            <td class="deadline-cell">30 – 60 dias</td>
+            <td class="action-cell"><button class="btn btn-outline" style="padding:8px 16px;font-size:0.85rem" data-wa data-wa-msg="Orçamento Sistema de Gestão">Pedir</button></td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Software Personalizado</strong><br>
+              <small style="color:var(--soft)">Plataformas e sistemas à medida</small>
+            </td>
+            <td class="price-cell">20.000 – 100.000 MZN</td>
+            <td class="deadline-cell">45 – 90 dias</td>
+            <td class="action-cell"><button class="btn btn-outline" style="padding:8px 16px;font-size:0.85rem" data-wa data-wa-msg="Orçamento Software Personalizado">Pedir</button></td>
+          </tr>
+          <tr>
+            <td>
+              <strong>App Mobile</strong><br>
+              <small style="color:var(--soft)">Android / iOS, login, notificações</small>
+            </td>
+            <td class="price-cell">15.000 – 70.000 MZN</td>
+            <td class="deadline-cell">30 – 75 dias</td>
+            <td class="action-cell"><button class="btn btn-outline" style="padding:8px 16px;font-size:0.85rem" data-wa data-wa-msg="Orçamento App Mobile">Pedir</button></td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Automação de Processos</strong><br>
+              <small style="color:var(--soft)">Chatbots, WhatsApp automático, integrações</small>
+            </td>
+            <td class="price-cell">6.000 – 30.000 MZN</td>
+            <td class="deadline-cell">7 – 30 dias</td>
+            <td class="action-cell"><button class="btn btn-outline" style="padding:8px 16px;font-size:0.85rem" data-wa data-wa-msg="Orçamento Automação">Pedir</button></td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Manutenção Mensal</strong><br>
+              <small style="color:var(--soft)">Suporte, updates, monitoramento, segurança</small>
+            </td>
+            <td class="price-cell">5.000 – 12.000 MZN/mês</td>
+            <td class="deadline-cell">Contrato mensal</td>
+            <td class="action-cell"><button class="btn btn-outline" style="padding:8px 16px;font-size:0.85rem" data-wa data-wa-msg="Orçamento Manutenção Mensal">Pedir</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section-label reveal">FAQ</div>
+    <h2 class="section-title reveal reveal-delay-1">Perguntas frequentes</h2>
+
+    <div class="faq-list reveal reveal-delay-2">
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Posso pagar em prestações?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">Sim. Para projectos acima de 15.000 MZN aceitamos pagamento em 2 ou 3 prestações: 50% no início, o restante na entrega. Converse connosco para combinar a melhor forma para o seu caso.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Quanto tempo demora até receber o orçamento?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">Enviamos uma proposta detalhada em até 24 horas após a nossa primeira conversa. Via WhatsApp costumamos responder muito mais rápido — geralmente em 2 horas durante o horário de trabalho.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          O que acontece se não ficar satisfeito com o resultado?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">Trabalhamos com revisões durante todo o processo de desenvolvimento para garantir que o produto final corresponde exactamente ao que foi acordado. Todos os projectos incluem um período de ajustes após a entrega.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Precisam de acesso às minhas redes sociais ou sistemas?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">Apenas se o projecto envolver integrações específicas. Nunca pedimos passwords — trabalhamos com convites de acesso limitado que pode revogar a qualquer momento.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          O site vai funcionar bem no telemóvel?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">Sempre. Todos os nossos projectos são desenvolvidos com abordagem mobile-first — o design começa pelo telemóvel e adapta-se ao tablet e desktop, não o contrário.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Trabalham para empresas fora de Pemba?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">Sim! Trabalhamos com clientes de todo Moçambique de forma remota via WhatsApp, email e chamadas de vídeo. Já entregámos projectos para Maputo, Nampula, Beira e outras cidades.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section alt-bg">
+  <div class="container" style="text-align:center">
+    <div class="cta-block reveal">
+      <h2>Não encontrou o que procurava?</h2>
+      <p>Desenvolvemos soluções completamente personalizadas. Conte-nos o seu projecto e criamos uma proposta à sua medida.</p>
+      <div class="cta-btns">
+        <button class="btn btn-wa btn-lg" data-wa>Falar no WhatsApp agora</button>
+        <a href="index.html#contacto" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,0.3)">Enviar email</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="img/logo.png" alt="Klay Systems" class="footer-logo-img">
+      <p>Transformamos ideias em soluções digitais que geram negócio. Baseados em Pemba, trabalhamos para todo Moçambique.</p>
+      <div class="footer-social">
+        <a href="https://github.com/klay-suate" target="_blank" class="social-btn">GH</a>
+        <a href="https://www.instagram.com/klay_suate" target="_blank" class="social-btn">IG</a>
+        <a href="https://www.linkedin.com/in/klayton-ant%C3%B3nio-suate-981164262/" target="_blank" class="social-btn">in</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="precos.html">Serviços</a></li>
+        <li><a href="projetos.html">Portfólio</a></li>
+        <li><a href="sobre.html">Sobre nós</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Serviços</h4>
+      <ul>
+        <li><a href="precos.html">Websites</a></li>
+        <li><a href="precos.html">App Mobile</a></li>
+        <li><a href="precos.html">Sistemas de Gestão</a></li>
+        <li><a href="precos.html">Automação</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <a href="https://wa.me/258870718218" class="footer-contact-item" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.108 1.522 5.83L.054 23.077a.75.75 0 00.916.914l5.316-1.454A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.723 9.723 0 01-4.985-1.37l-.356-.213-3.688 1.008 1.03-3.597-.233-.371A9.694 9.694 0 012.25 12c0-5.376 4.374-9.75 9.75-9.75S21.75 6.624 21.75 12 17.376 21.75 12 21.75z"/></svg>
+        +258 870 718 218
+      </a>
+      <a href="mailto:klaysuate@gmail.com" class="footer-contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        klay.webservices@gmail.com
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom container">
+    <span>© 2026 Klay Systems. Todos os direitos reservados.</span>
+    <span>Feito com total atensão em Moçambique</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/258870718218?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20orçamento." class="wa-float" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.108 1.522 5.83L.054 23.077a.75.75 0 00.916.914l5.316-1.454A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.723 9.723 0 01-4.985-1.37l-.356-.213-3.688 1.008 1.03-3.597-.233-.371A9.694 9.694 0 012.25 12c0-5.376 4.374-9.75 9.75-9.75S21.75 6.624 21.75 12 17.376 21.75 12 21.75z"/></svg>
+  <span class="wa-label">WhatsApp</span>
+</a>
+
+<script src="script.js"></script>
+<script>
+function toggleFaq(el) {
+  const answer = el.nextElementSibling;
+  const isOpen = el.classList.toggle('open');
+  answer.classList.toggle('open', isOpen);
+}
+</script>
+</body>
+</html>

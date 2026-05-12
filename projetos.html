@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Klay Systems | Projetos Entregues</title>
+  <meta name="description" content="Portfólio de projectos desenvolvidos pela Klay Systems — websites, sistemas e aplicações para empresas moçambicanas.">
+  <link rel="icon" type="image/png" href="img/icon.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .page-hero {
+      padding: calc(var(--nav-h) + 64px) 0 64px;
+      text-align: center;
+      background: var(--bg2);
+      border-bottom: 1px solid #e8e8e4;
+    }
+    .page-hero h1 { margin-bottom: 12px; }
+    .page-hero p { max-width: 520px; margin: 0 auto; font-size: 1.1rem; }
+
+    /* Project cards — alternating layout */
+    .project-list { display: flex; flex-direction: column; gap: 80px; }
+    .project-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .project-item.reverse { direction: rtl; }
+    .project-item.reverse > * { direction: ltr; }
+    .project-visual {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      aspect-ratio: 16/9;
+      background: var(--bg2);
+    }
+    .project-visual img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .project-visual:hover img { transform: scale(1.04); }
+    .project-details {}
+    .project-number {
+      font-family: 'Syne', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: #f0f0ec;
+      line-height: 1;
+      margin-bottom: -8px;
+    }
+    .project-details h2 {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+    .project-details p {
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .project-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding: 16px;
+      background: var(--bg2);
+      border-radius: var(--radius);
+      border: 1px solid #e8e8e4;
+    }
+    .meta-item { font-size: 0.85rem; }
+    .meta-label { color: var(--muted); font-weight: 500; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 2px; }
+    .meta-value { color: var(--text); font-weight: 500; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .project-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* Filter pills */
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+    .filter-pill {
+      padding: 7px 18px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      border: 1.5px solid #e0e0dc;
+      background: transparent;
+      color: var(--soft);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .filter-pill.active, .filter-pill:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    @media (max-width: 768px) {
+      .project-item, .project-item.reverse { grid-template-columns: 1fr; direction: ltr; gap: 28px; }
+      .project-number { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <img src="img/logo.png" alt="Klay Systems" height="36">
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Início</a>
+      <a href="precos.html">Serviços</a>
+      <a href="projetos.html" class="active">Projetos</a>
+      <a href="sobre.html">Sobre</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="index.html#contacto" class="btn btn-primary">Pedir orçamento</a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="index.html">Início</a>
+  <a href="precos.html">Serviços</a>
+  <a href="projetos.html" class="active">Projetos</a>
+  <a href="sobre.html">Sobre</a>
+  <div class="mobile-menu-cta">
+    <a href="index.html#contacto" class="btn btn-primary btn-lg">Pedir orçamento grátis</a>
+    <button class="btn btn-wa btn-lg" data-wa>WhatsApp</button>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="section-label reveal">Portfólio</div>
+    <h1 class="reveal reveal-delay-1">Projetos que entregámos</h1>
+    <p class="reveal reveal-delay-2">Cada projecto é desenvolvido do zero, com atenção ao detalhe e foco no resultado final do cliente.</p>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section">
+  <div class="container">
+
+    <div class="project-list">
+
+      <!-- Project 1 -->
+      <div class="project-item reveal">
+        <div class="project-visual">
+          <img src="img/dashboard_uniconect.png" alt="UniConnect — Dashboard rede social universitária" width="800" height="450" loading="lazy">
+        </div>
+        <div class="project-details">
+          <div class="project-number">01</div>
+          <h2>UniConnect</h2>
+          <p>Rede social universitária com sistema de perfis, mensagens em tempo real, grupos de estudo e dashboard administrativo para gestão de utilizadores e conteúdo.</p>
+          <div class="project-meta">
+            <div class="meta-item">
+              <div class="meta-label">Tipo</div>
+              <div class="meta-value">Sistema Web</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Prazo</div>
+              <div class="meta-value">45 dias</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Utilizadores</div>
+              <div class="meta-value">100+ no lançamento</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Estado</div>
+              <div class="meta-value">✓ Entregue</div>
+            </div>
+          </div>
+          <div class="project-tags">
+            <span class="tag tech">React</span>
+            <span class="tag tech">Node.js</span>
+            <span class="tag tech">MongoDB</span>
+            <span class="tag tech">Socket.io</span>
+          </div>
+          <div class="project-actions">
+            <a href="#" class="btn btn-primary">Ver projecto ao vivo ↗</a>
+            <button class="btn btn-outline" data-wa data-wa-msg="Olá! Vi o projecto UniConnect no portfólio e gostaria de algo semelhante.">Projecto semelhante</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-item reverse reveal">
+        <div class="project-visual">
+          <img src="img/HomepageRestaurante.png" alt="Restaurante Sabor — Homepage" width="800" height="450" loading="lazy">
+        </div>
+        <div class="project-details">
+          <div class="project-number">02</div>
+          <h2>Restaurante Sabor</h2>
+          <p>Website institucional para restaurante com menu digital interactivo, galeria de pratos, sistema de reservas via WhatsApp e integração com Google Maps para localização.</p>
+          <div class="project-meta">
+            <div class="meta-item">
+              <div class="meta-label">Tipo</div>
+              <div class="meta-value">Website Profissional</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Prazo</div>
+              <div class="meta-value">10 dias</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Resultado</div>
+              <div class="meta-value">↑ Reservas online</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Estado</div>
+              <div class="meta-value">✓ Entregue</div>
+            </div>
+          </div>
+          <div class="project-tags">
+            <span class="tag tech">HTML5</span>
+            <span class="tag tech">CSS3</span>
+            <span class="tag tech">JavaScript</span>
+          </div>
+          <div class="project-actions">
+            <a href="#" class="btn btn-primary">Ver projecto ao vivo ↗</a>
+            <button class="btn btn-outline" data-wa data-wa-msg="Olá! Vi o projecto Restaurante Sabor no portfólio e gostaria de um site semelhante.">Projecto semelhante</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-item reveal">
+        <div class="project-visual">
+          <img src="img/portfolio.png" alt="Portfólio pessoal — Developer" width="800" height="450" loading="lazy">
+        </div>
+        <div class="project-details">
+          <div class="project-number">03</div>
+          <h2>Portfólio Pessoal</h2>
+          <p>Landing page minimalista para developer com animações CSS, secção de projectos com filtros, formulário de contacto e design optimizado para conversão de clientes freelance.</p>
+          <div class="project-meta">
+            <div class="meta-item">
+              <div class="meta-label">Tipo</div>
+              <div class="meta-value">Landing Page</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Prazo</div>
+              <div class="meta-value">5 dias</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Performance</div>
+              <div class="meta-value">98 / 100</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Estado</div>
+              <div class="meta-value">✓ Entregue</div>
+            </div>
+          </div>
+          <div class="project-tags">
+            <span class="tag tech">React</span>
+            <span class="tag tech">CSS Animations</span>
+          </div>
+          <div class="project-actions">
+            <a href="https://klay-suate.github.io/portfolio01/" target="_blank" class="btn btn-primary">Ver ao vivo ↗</a>
+            <button class="btn btn-outline" data-wa data-wa-msg="Olá! Vi o projecto de portfólio pessoal e gostaria de algo semelhante.">Projecto semelhante</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="project-item reverse reveal">
+        <div class="project-visual">
+          <img src="img/loja.png" alt="Loja online de roupa" width="800" height="450" loading="lazy">
+        </div>
+        <div class="project-details">
+          <div class="project-number">04</div>
+          <h2>Loja Online Fashion</h2>
+          <p>E-commerce completo para loja de roupa com catálogo de produtos por categorias, carrinho de compras, gestão de stock pelo proprietário e integração para pagamentos locais.</p>
+          <div class="project-meta">
+            <div class="meta-item">
+              <div class="meta-label">Tipo</div>
+              <div class="meta-value">E-commerce</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Prazo</div>
+              <div class="meta-value">28 dias</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Produtos</div>
+              <div class="meta-value">150+ SKUs</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Estado</div>
+              <div class="meta-value">✓ Entregue</div>
+            </div>
+          </div>
+          <div class="project-tags">
+            <span class="tag tech">WooCommerce</span>
+            <span class="tag tech">WordPress</span>
+            <span class="tag tech">PHP</span>
+          </div>
+          <div class="project-actions">
+            <a href="#" class="btn btn-primary">Ver projecto ao vivo ↗</a>
+            <button class="btn btn-outline" data-wa data-wa-msg="Olá! Vi o projecto da Loja Fashion no portfólio e gostaria de uma loja online semelhante.">Projecto semelhante</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section alt-bg">
+  <div class="container" style="text-align:center">
+    <div class="cta-block reveal">
+      <h2>Quer um projecto assim para a sua empresa?</h2>
+      <p>Conte-nos a sua ideia. Fazemos uma proposta gratuita em 24 horas com prazo, tecnologias e preço definidos.</p>
+      <div class="cta-btns">
+        <button class="btn btn-wa btn-lg" data-wa>Falar no WhatsApp agora</button>
+        <a href="precos.html" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,0.3)">Ver planos e preços</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="img/logo.png" alt="Klay Systems" class="footer-logo-img">
+      <p>Transformamos ideias em soluções digitais que geram negócio. Baseados em Pemba, trabalhamos para todo Moçambique.</p>
+      <div class="footer-social">
+        <a href="https://github.com/klay-suate" target="_blank" class="social-btn">GH</a>
+        <a href="https://www.instagram.com/klay_suate" target="_blank" class="social-btn">IG</a>
+        <a href="https://www.linkedin.com/in/klayton-ant%C3%B3nio-suate-981164262/" target="_blank" class="social-btn">in</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="precos.html">Serviços</a></li>
+        <li><a href="projetos.html">Portfólio</a></li>
+        <li><a href="sobre.html">Sobre nós</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Serviços</h4>
+      <ul>
+        <li><a href="precos.html">Websites</a></li>
+        <li><a href="precos.html">App Mobile</a></li>
+        <li><a href="precos.html">Sistemas de Gestão</a></li>
+        <li><a href="precos.html">Automação</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <a href="https://wa.me/258870718218" class="footer-contact-item" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.108 1.522 5.83L.054 23.077a.75.75 0 00.916.914l5.316-1.454A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.723 9.723 0 01-4.985-1.37l-.356-.213-3.688 1.008 1.03-3.597-.233-.371A9.694 9.694 0 012.25 12c0-5.376 4.374-9.75 9.75-9.75S21.75 6.624 21.75 12 17.376 21.75 12 21.75z"/></svg>
+        +258 870 718 218
+      </a>
+      <a href="mailto:klaysuate@gmail.com" class="footer-contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        klay.webservices@gmail.com
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom container">
+    <span>© 2026 Klay Systems. Todos os direitos reservados.</span>
+    <span>Feito com total atensão em Moçambique</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/258870718218?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20orçamento." class="wa-float" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.108 1.522 5.83L.054 23.077a.75.75 0 00.916.914l5.316-1.454A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.723 9.723 0 01-4.985-1.37l-.356-.213-3.688 1.008 1.03-3.597-.233-.371A9.694 9.694 0 012.25 12c0-5.376 4.374-9.75 9.75-9.75S21.75 6.624 21.75 12 17.376 21.75 12 21.75z"/></svg>
+  <span class="wa-label">WhatsApp</span>
+</a>
+
+<script src="script.js"></script>
+</body>
+</html>
